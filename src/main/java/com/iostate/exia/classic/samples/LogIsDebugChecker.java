@@ -3,8 +3,8 @@ package github.exia.samples;
 import java.io.File;
 import java.io.FileFilter;
 
-import github.exia.ast.util.AstUtils;
-import github.exia.ast.util.FindUpper;
+import com.iostate.exia.ast.FindUpper;
+import com.iostate.exia.ast.AstUtils;
 import com.iostate.exia.walk.AstFunction;
 import com.iostate.exia.walk.FileWalker;
 import com.iostate.exia.walk.JavaSourceFileFilter;

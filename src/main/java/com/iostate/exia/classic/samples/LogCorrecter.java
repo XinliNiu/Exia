@@ -3,7 +3,7 @@ package github.exia.samples;
 import java.io.File;
 import java.io.FileFilter;
 
-import github.exia.ast.util.AstUtils;
+import com.iostate.exia.ast.AstUtils;
 import github.exia.ast.util.FindUpper;
 import com.iostate.exia.walk.AstFunction;
 import com.iostate.exia.walk.FileWalker;

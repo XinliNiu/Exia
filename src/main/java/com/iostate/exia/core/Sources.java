@@ -1,4 +1,4 @@
-package com.iostate.exia.util;
+package com.iostate.exia.core;
 
 import java.io.File;
 import java.util.Map;

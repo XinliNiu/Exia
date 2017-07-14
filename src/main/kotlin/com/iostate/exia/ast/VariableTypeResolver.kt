@@ -59,7 +59,7 @@ class VariableTypeResolver(varSymbol: String, private val minScope: ASTNode) {
       throw RuntimeException(maybeFrag.toString())
     }
     val props = varDecl.structuralPropertiesForType() as List<StructuralPropertyDescriptor>
-    return props.filter({ p -> p.isChildProperty() && p.getId().equals("type") })
+    return props.filter({ p -> p.isChildProperty() && p.getId() == "type" })
         .map { p ->
           varDecl.getStructuralProperty(p) as Type
         }.first()

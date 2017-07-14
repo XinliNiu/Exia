@@ -2,7 +2,7 @@ package github.exia.sg.visitors;
 
 
 import com.iostate.exia.util.StringMatcher;
-import github.exia.ast.util.AstUtils;
+import com.iostate.exia.ast.AstUtils;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.ClassInstanceCreation;

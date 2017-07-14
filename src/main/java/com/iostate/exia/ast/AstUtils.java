@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.iostate.exia.util.MyLogger;
 import com.iostate.exia.walk.Assert;
-import com.iostate.exia.walk.SourcePaths;
+import com.iostate.exia.core.SourcePaths;
 import github.exia.util.CuBase;
 import org.eclipse.jdt.core.dom.*;
 import org.eclipse.jdt.core.dom.Modifier.ModifierKeyword;
@@ -173,8 +173,8 @@ public class AstUtils {
 	}
 	
 	public static boolean hasModifierKeyword(BodyDeclaration decl, ModifierKeyword keyword) {
-	    Assert.notNull(decl);
-	    Assert.notNull(keyword);
+	    Assert.isNotNull(decl);
+	    Assert.isNotNull(keyword);
 		for (Object each : decl.modifiers()) {
 			if (each instanceof Modifier) {
 				if ( ((Modifier) each).getKeyword().equals(keyword) ) {
@@ -204,15 +204,14 @@ public class AstUtils {
     return supers;
   }
 	
-	public static boolean isFieldInjectable(FieldDeclaration fd) {
+	public static boolean isFieldInjectable(FieldDeclaration fd, String annoClassSimpleName) {
 	  for (Object modifier : fd.modifiers()) {
 	    if (modifier instanceof Annotation) {
 	      Annotation annotation = (Annotation)modifier;
 	      String annoTypeName = annotation.getTypeName().getFullyQualifiedName();
-	      if (annoTypeName.equals("In")) {
+	      if (annoTypeName.equals(annoClassSimpleName)) {
 	        return true;
-	      }
-	      else if (annoTypeName.contains("In")) {
+	      } else if (annoTypeName.contains(annoClassSimpleName)) {
 	        logger.log("Strange annotation type: " + annoTypeName);
 	      }
 	    }

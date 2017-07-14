@@ -3,6 +3,8 @@ package github.exia.ast.util;
 import java.util.List;
 
 import com.iostate.exia.util.Assert;
+import com.iostate.exia.util.PrimitiveUtil;
+import com.iostate.exia.util.StringMatcher;
 import github.exia.sg.visitors.GenericSelector;
 import com.iostate.exia.ast.visitors.SimpleNameReplacer;
 import github.exia.sg.visitors.TypeReferenceSelector;
@@ -28,7 +30,7 @@ public class AstHelper {
     Type rt;
     if (ejbReturnType instanceof PrimitiveType) {
       String primTypeName = ((PrimitiveType) ejbReturnType).getPrimitiveTypeCode().toString();
-      rt = createSimpleType(PrimitiveTypeBoxer.box(primTypeName));
+      rt = createSimpleType(PrimitiveUtil.boxType(primTypeName));
     } else {
       rt = (Type) ASTNode.copySubtree(ast, ejbReturnType);
     }

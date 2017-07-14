@@ -1,12 +1,11 @@
 package com.iostate.exia.ast;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import com.iostate.exia.core.Sources;
 import github.exia.ast.util.AstUtils;
 import com.iostate.exia.walk.Assert;
-import com.iostate.exia.walk.SourcePaths;
+import com.iostate.exia.core.SourcePaths;
 import github.exia.sg.visitors.GenericSelector;
 import github.exia.util.CuBase;
 import org.eclipse.jdt.core.dom.*;
@@ -77,7 +76,7 @@ public class AstFind {
       return ((SimpleType) type).getName().toString().trim();
     }
     if (type instanceof ArrayType) {
-      return typeName(((ArrayType & java.io.Serializable) type).getElementType());
+      return typeName(((ArrayType) type).getElementType());
     }
     if (type instanceof ParameterizedType) {
       return typeName(((ParameterizedType) type).getType());
@@ -88,22 +87,6 @@ public class AstFind {
       return noAnnoType.toString().trim();
     }
     return type.toString().trim();
-  }
-
-  public static List<VariableDeclarationFragment> fields(String qname) {
-    return fieldDeclFrags((TypeDeclaration) typeDecl(qname)).collect(Collectors.toList());
-  }
-
-  public static Set<String> fieldNameSet(TypeDeclaration td) {
-    return fieldDeclFrags(td).map(frag -> frag.getName().getIdentifier()).collect(Collectors.toSet());
-  }
-
-  private static Stream<VariableDeclarationFragment> fieldDeclFrags(TypeDeclaration td) {
-    return Stream.of(td.getFields())
-        .flatMap(fd -> {
-          List<VariableDeclarationFragment> fragments = fd.fragments();
-          return fragments.stream();
-        });
   }
 
   public static List<TypeDeclaration> superClasses(TypeDeclaration td) {
@@ -180,7 +163,7 @@ public class AstFind {
     }
 
     List<Type> hits = findDeclTypeInClass(sn, FindUpper.typeScope(sn));
-    Assert.beTrue(hits.size() <= 1);
+    Assert.isTrue(hits.size() <= 1);
     if (hits.size() == 1) {
       return AstUtils.pureNameOfType(hits.get(0));
     }
@@ -190,7 +173,7 @@ public class AstFind {
 
   private static List<Type> findDeclTypeInClass(SimpleName sn, String qname) {
     if (qname == null) {
-      return Collections.EMPTY_LIST;
+      return Collections.emptyList();
     }
     String queryName = qname.replace('.', '/') + ".java";
     String pathHit = null;
@@ -202,7 +185,7 @@ public class AstFind {
     }
     if (pathHit == null) {// Not found this class
       logger.log(qname+" not found");
-      return Collections.EMPTY_LIST;
+      return Collections.emptyList();
     }
     try {
       TypeDeclaration typeclass = AstUtils.getType(CuBase.getCuNoCache(pathHit, false));
@@ -223,6 +206,7 @@ public class AstFind {
         superQname = superclassName;
       }
       final CompilationUnit cu = FindUpper.cu(typeclass);
+      assert cu != null;
       ImportDeclaration imp = AstUtils.findImportByLastName(superclassName, cu.imports());
       if(imp != null) superQname = imp.getName().getFullyQualifiedName();
       else superQname = cu.getPackage().getName().getFullyQualifiedName()+'.'+superclassName;

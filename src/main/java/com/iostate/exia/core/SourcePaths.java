@@ -1,9 +1,10 @@
-package com.iostate.exia.walk;
+package com.iostate.exia.core;
 
 import java.io.File;
 import java.util.*;
 
 import com.iostate.exia.util.MyLogger;
+import com.iostate.exia.walk.FileWalker;
 
 public class SourcePaths {
   private static boolean inited = false;
