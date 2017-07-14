@@ -1,4 +1,4 @@
-package github.exia.util;
+package com.iostate.exia.classic.util;
 
 
 import java.io.File;

@@ -1,12 +1,12 @@
-package github.exia.main;
+package com.iostate.exia.classic.main;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import github.exia.samples.LogCorrecter;
-import github.exia.samples.LogIsDebugChecker;
-import github.exia.samples.UnusedImportDeletor;
+import com.iostate.exia.classic.samples.LogCorrecter;
+import com.iostate.exia.classic.samples.UnusedImportDeletor;
+import com.iostate.exia.classic.samples.LogIsDebugChecker;
 
 
 public class Main {

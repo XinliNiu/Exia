@@ -17,7 +17,7 @@ public class AstCheck {
     return supers.contains(AstFind.qnameOfTopTypeDecl(sp.getName()));
   }
 
-  static void findSupers(AbstractTypeDeclaration atd, List<String> list) {
+  private static void findSupers(AbstractTypeDeclaration atd, List<String> list) {
     if (atd instanceof TypeDeclaration) {
       TypeDeclaration td = (TypeDeclaration) atd;
       List<Type> intfs = td.superInterfaceTypes();

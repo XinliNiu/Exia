@@ -1,15 +1,12 @@
-package github.exia.ast.util;
+package com.iostate.exia.ast;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.iostate.exia.util.MyLogger;
-import com.iostate.exia.walk.Assert;
 import com.iostate.exia.core.SourcePaths;
-import github.exia.util.CuBase;
+import com.iostate.exia.classic.util.CuBase;
 import org.eclipse.jdt.core.dom.*;
-import org.eclipse.jdt.core.dom.Modifier.ModifierKeyword;
 
 @SuppressWarnings("unchecked")
 public class AstUtils {
@@ -147,7 +144,7 @@ public class AstUtils {
 		String className = type.getName().getIdentifier();
 		
 		List<SingleVariableDeclaration> pars = method.parameters();
-		List<String> emParameters = new ArrayList<String>();
+		List<String> emParameters = new ArrayList<>();
 		for (SingleVariableDeclaration par : pars) {
 			String typename = AstUtils.pureNameOfType(par.getType());
 			emParameters.add(typename);
@@ -157,7 +154,7 @@ public class AstUtils {
 	}
 	
 	public static List<MethodSig> toMethodSigs(List<MethodDeclaration> methods) {
-		List<MethodSig> methodSigs = new LinkedList<MethodSig>();
+		List<MethodSig> methodSigs = new ArrayList<>();
 		for (MethodDeclaration method : methods) {
 			methodSigs.add(AstUtils.toMethodSig(method));
 		}
@@ -170,19 +167,6 @@ public class AstUtils {
 	
 	public static boolean isClientCallGrammar(MethodInvocation mi) {
 		return !isSelfCallGrammar(mi);
-	}
-	
-	public static boolean hasModifierKeyword(BodyDeclaration decl, ModifierKeyword keyword) {
-	    Assert.isNotNull(decl);
-	    Assert.isNotNull(keyword);
-		for (Object each : decl.modifiers()) {
-			if (each instanceof Modifier) {
-				if ( ((Modifier) each).getKeyword().equals(keyword) ) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
   public static List<TypeDeclaration> superClasses(TypeDeclaration td) {

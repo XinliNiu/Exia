@@ -3,11 +3,10 @@ package com.iostate.exia.ast;
 import java.util.*;
 
 import com.iostate.exia.core.Sources;
-import github.exia.ast.util.AstUtils;
 import com.iostate.exia.walk.Assert;
 import com.iostate.exia.core.SourcePaths;
-import github.exia.sg.visitors.GenericSelector;
-import github.exia.util.CuBase;
+import com.iostate.exia.classic.sg.visitors.GenericSelector;
+import com.iostate.exia.classic.util.CuBase;
 import org.eclipse.jdt.core.dom.*;
 import com.iostate.exia.util.*;
 

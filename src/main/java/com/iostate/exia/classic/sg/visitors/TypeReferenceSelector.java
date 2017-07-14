@@ -1,4 +1,4 @@
-package github.exia.sg.visitors;
+package com.iostate.exia.classic.sg.visitors;
 
 import java.util.HashSet;
 import java.util.Set;

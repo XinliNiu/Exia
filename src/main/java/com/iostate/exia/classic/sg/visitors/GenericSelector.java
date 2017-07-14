@@ -1,4 +1,4 @@
-package github.exia.sg.visitors;
+package com.iostate.exia.classic.sg.visitors;
 
 import java.util.ArrayList;
 import java.util.List;

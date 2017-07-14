@@ -1,13 +1,13 @@
-package github.exia.ast.util;
+package com.iostate.exia.ast;
 
 import java.util.List;
 
 import com.iostate.exia.util.Assert;
 import com.iostate.exia.util.PrimitiveUtil;
 import com.iostate.exia.util.StringMatcher;
-import github.exia.sg.visitors.GenericSelector;
+import com.iostate.exia.classic.sg.visitors.GenericSelector;
 import com.iostate.exia.ast.visitors.SimpleNameReplacer;
-import github.exia.sg.visitors.TypeReferenceSelector;
+import com.iostate.exia.classic.sg.visitors.TypeReferenceSelector;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.core.dom.*;
 

@@ -1,4 +1,4 @@
-package github.exia.sg.visitors;
+package com.iostate.exia.classic.sg.visitors;
 
 import org.eclipse.jdt.core.dom.*;
 

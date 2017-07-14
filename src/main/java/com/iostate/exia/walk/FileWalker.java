@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.iostate.exia.io.FileUtil;
 import com.iostate.exia.util.MyLogger;
-import github.exia.util.CuBase;
+import com.iostate.exia.classic.util.CuBase;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 

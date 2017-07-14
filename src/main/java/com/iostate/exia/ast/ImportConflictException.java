@@ -1,4 +1,4 @@
-package github.exia.ast.util;
+package com.iostate.exia.ast;
 
 public class ImportConflictException extends RuntimeException {
 

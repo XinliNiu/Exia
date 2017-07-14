@@ -1,7 +1,7 @@
-package github.exia.sg.visitors;
+package com.iostate.exia.classic.sg.visitors;
 
 
-import github.exia.ast.util.FindUpper;
+import com.iostate.exia.ast.FindUpper;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.Statement;

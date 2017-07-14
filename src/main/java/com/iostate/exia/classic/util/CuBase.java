@@ -1,4 +1,4 @@
-package github.exia.util;
+package com.iostate.exia.classic.util;
 
 
 import java.io.File;
@@ -6,9 +6,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.iostate.exia.classic.sg.visitors.ExtraArrayDimensionRewriter;
 import com.iostate.exia.io.FileUtil;
 import com.iostate.exia.util.Assert;
-import github.exia.sg.visitors.ExtraArrayDimensionRewriter;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.dom.AST;

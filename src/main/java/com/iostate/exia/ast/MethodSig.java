@@ -1,9 +1,9 @@
-package github.exia.ast.util;
+package com.iostate.exia.ast;
 
 import java.util.List;
 
-import github.exia.util.CommonUtils;
-import org.junit.Assert;
+import com.iostate.exia.classic.util.CommonUtils;
+import com.iostate.exia.util.Assert;
 
 /**
  * @Immutable 

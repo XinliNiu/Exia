@@ -1,4 +1,4 @@
-package github.exia.samples;
+package com.iostate.exia.classic.samples;
 
 import java.io.File;
 import java.io.FileFilter;
