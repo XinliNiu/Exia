@@ -2,7 +2,7 @@ package com.iostate.exia.ast;
 
 import java.util.List;
 
-import com.iostate.exia.classic.util.CommonUtils;
+import com.iostate.exia.util.OtherUtil;
 import com.iostate.exia.util.Assert;
 
 /**
@@ -68,7 +68,7 @@ public class MethodSig {
 	
 	public static MethodSig fromMeta(String meta) {
 	  String[] parts = meta.split("::");
-	  return new MethodSig(parts[0], parts[1], parts[2], CommonUtils.readListRegardNull(parts[3]));
+	  return new MethodSig(parts[0], parts[1], parts[2], OtherUtil.readListRegardNull(parts[3]));
 	}
 	
 	@Override
