@@ -15,8 +15,7 @@ public class FindUpper {
 	}
 
   /**
-   * This algorithm had better get reviewed.
-   * Returns null if not found until it meets Block
+   * Returns null if not found until it meets BodyDeclaration
    */
   public static Statement statement(ASTNode node) {
   	ASTNode parent = node.getParent();
@@ -24,14 +23,13 @@ public class FindUpper {
   	if (parent == null) {
   		return null;
   	}
-  
+
   	if (parent instanceof Statement) {
   		return (Statement) parent;
-  	}
-  	else if (parent instanceof Block) {
+  	} else if (parent instanceof BodyDeclaration) {
   		return null;
-  	}
-  
+		}
+
   	return statement(parent);
   }
 
