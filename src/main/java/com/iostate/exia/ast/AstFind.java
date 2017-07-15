@@ -2,7 +2,7 @@ package com.iostate.exia.ast;
 
 import java.util.*;
 
-import com.iostate.exia.walk.Assert;
+import com.iostate.exia.util.Assert;
 import com.iostate.exia.core.SourcePaths;
 import com.iostate.exia.classic.sg.visitors.GenericSelector;
 import com.iostate.exia.core.CuBase;
@@ -161,7 +161,7 @@ public class AstFind {
     }
 
     List<Type> hits = findDeclTypeInClass(sn, FindUpper.typeScope(sn));
-    Assert.isTrue(hits.size() <= 1);
+    Assert.assertTrue(hits.size() <= 1);
     if (hits.size() == 1) {
       return AstUtils.pureNameOfType(hits.get(0));
     }
@@ -186,11 +186,11 @@ public class AstFind {
       return Collections.emptyList();
     }
     try {
-      TypeDeclaration typeclass = AstUtils.getType(CuBase.getCuNoCache(pathHit, false));
+      TypeDeclaration typeclass = AstUtils.getType(CuBase.getCuByPath(pathHit));
       return findDeclTypeInClass(sn, typeclass);
     } catch (RuntimeException e) {
       logger.log("pathHit: "+pathHit);
-      logger.log(CuBase.getCuNoCache(pathHit, false));
+      logger.log(CuBase.getCuByPath(pathHit));
       throw e;
     }
   }

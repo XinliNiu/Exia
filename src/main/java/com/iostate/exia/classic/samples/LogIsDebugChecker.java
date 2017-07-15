@@ -5,9 +5,9 @@ import java.io.FileFilter;
 
 import com.iostate.exia.ast.FindUpper;
 import com.iostate.exia.ast.AstUtils;
-import com.iostate.exia.walk.AstFunction;
-import com.iostate.exia.walk.FileWalker;
-import com.iostate.exia.walk.JavaSourceFileFilter;
+import com.iostate.exia.api.AstFunction;
+import com.iostate.exia.core.FileWalker;
+import com.iostate.exia.api.JavaSourceFileFilter;
 import org.eclipse.jdt.core.dom.*;
 
 /**

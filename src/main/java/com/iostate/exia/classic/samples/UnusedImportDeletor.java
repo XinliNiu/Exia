@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.iostate.exia.classic.sg.visitors.GenericSelector;
-import com.iostate.exia.walk.AstFunction;
-import com.iostate.exia.walk.FileWalker;
-import com.iostate.exia.walk.JavaSourceFileFilter;
+import com.iostate.exia.api.AstFunction;
+import com.iostate.exia.core.FileWalker;
+import com.iostate.exia.api.JavaSourceFileFilter;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ImportDeclaration;

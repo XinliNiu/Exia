@@ -119,7 +119,7 @@ public class CuBase {
 		return cu;
 	}
 	
-  public static CompilationUnit getCuNoCache(String srcFile, boolean recordable) {
+  public static CompilationUnit getCuByPathNoCache(String srcFile, boolean recordable) {
     String source = FileUtil.read(new File(srcFile));
 
 		return getCuBySourceNoCache(source, recordable);

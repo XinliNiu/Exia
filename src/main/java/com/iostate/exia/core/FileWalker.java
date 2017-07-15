@@ -1,4 +1,4 @@
-package com.iostate.exia.walk;
+package com.iostate.exia.core;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.iostate.exia.io.FileUtil;
 import com.iostate.exia.util.MyLogger;
-import com.iostate.exia.core.CuBase;
+import com.iostate.exia.api.AstFunction;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 
@@ -103,12 +103,12 @@ public class FileWalker {
 
   private void processFile(File file) {
     currentFile.set(file);
-    CompilationUnit cu = CuBase.getCuByPath(file.getPath());
+    CompilationUnit cu = CuBase.getCuByPathNoCache(file.getPath(), true);
     boolean modified;
     try {
       modified = function.doAndModify(cu, file);
     } catch (RuntimeException e) {
-      logger.log("Error at " + file.getPath());
+      logger.log("Error at file: " + file.getPath());
       throw e;
     }
     if (modified) {
@@ -116,6 +116,5 @@ public class FileWalker {
       String content = CuBase.rewriteSource(file.getPath());
       FileUtil.write(file, content);
     }
-    CuBase.unloadAnyFile(file.getPath());
   }
 }
