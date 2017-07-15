@@ -1,4 +1,4 @@
-package com.iostate.exia.classic.sg.visitors;
+package com.iostate.exia.ast.visitors;
 
 
 import com.iostate.exia.util.StringMatcher;

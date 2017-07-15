@@ -4,7 +4,7 @@ import java.util.*;
 
 import com.iostate.exia.util.Assert;
 import com.iostate.exia.core.SourcePaths;
-import com.iostate.exia.classic.sg.visitors.GenericSelector;
+import com.iostate.exia.ast.visitors.GenericSelector;
 import com.iostate.exia.core.CuBase;
 import org.eclipse.jdt.core.dom.*;
 import com.iostate.exia.util.*;

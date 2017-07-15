@@ -5,9 +5,9 @@ import java.util.List;
 import com.iostate.exia.util.Assert;
 import com.iostate.exia.util.PrimitiveTypeUtil;
 import com.iostate.exia.util.StringMatcher;
-import com.iostate.exia.classic.sg.visitors.GenericSelector;
+import com.iostate.exia.ast.visitors.GenericSelector;
 import com.iostate.exia.ast.visitors.SimpleNameReplacer;
-import com.iostate.exia.classic.sg.visitors.TypeReferenceSelector;
+import com.iostate.exia.ast.visitors.TypeReferenceSelector;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jdt.core.dom.*;
 
