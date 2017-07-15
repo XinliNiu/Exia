@@ -2,11 +2,10 @@ package com.iostate.exia.ast;
 
 import java.util.*;
 
-import com.iostate.exia.core.Sources;
 import com.iostate.exia.walk.Assert;
 import com.iostate.exia.core.SourcePaths;
 import com.iostate.exia.classic.sg.visitors.GenericSelector;
-import com.iostate.exia.classic.util.CuBase;
+import com.iostate.exia.core.CuBase;
 import org.eclipse.jdt.core.dom.*;
 import com.iostate.exia.util.*;
 
@@ -27,7 +26,7 @@ public class AstFind {
       // Has qualifier and is not inner-class
       return typeName;
     }
-    if (PrimitiveUtil.isPrimitive(typeName) || langTypes.contains(typeName)) {
+    if (PrimitiveTypeUtil.isPrimitive(typeName) || langTypes.contains(typeName)) {
       return typeName;
     }
     if (cu == null) {
@@ -35,7 +34,7 @@ public class AstFind {
     }
 
     String asLocal = cu.getPackage().getName().getFullyQualifiedName() + "." + typeName;
-    if (Sources.containsQname(asLocal)) {
+    if (SourcePaths.containsQname(asLocal)) {
       return asLocal;
     }
 
@@ -43,7 +42,7 @@ public class AstFind {
     for (ImportDeclaration imp : imports) {
       if (imp.isOnDemand()) {
         String hit = imp.getName().getFullyQualifiedName() + "." + typeName;
-        if (Sources.containsQname(hit)) {
+        if (SourcePaths.containsQname(hit)) {
           return hit;
         }
       } else {
@@ -103,7 +102,7 @@ public class AstFind {
         assert imp != null;
         name = imp.getName().getFullyQualifiedName();
       }
-      supers.add((TypeDeclaration) Sources.getCuByQname(name).types().get(0));
+      supers.add((TypeDeclaration) CuBase.getCuByQname(name).types().get(0));
     }
     return supers;
   }
@@ -141,7 +140,7 @@ public class AstFind {
   }
 
   static AbstractTypeDeclaration typeDecl(String qname) {
-    return (AbstractTypeDeclaration) Sources.getCuByQname(qname).types().get(0);
+    return (AbstractTypeDeclaration) CuBase.getCuByQname(qname).types().get(0);
   }
 
   /**

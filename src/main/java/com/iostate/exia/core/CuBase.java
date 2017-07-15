@@ -1,12 +1,14 @@
-package com.iostate.exia.classic.util;
+package com.iostate.exia.core;
 
 
 import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.iostate.exia.classic.sg.visitors.ExtraArrayDimensionRewriter;
+import com.iostate.exia.core.SourcePaths;
 import com.iostate.exia.io.FileUtil;
 import com.iostate.exia.util.Assert;
 import org.eclipse.jdt.core.JavaCore;
@@ -24,7 +26,7 @@ import org.eclipse.text.edits.TextEdit;
 
 
 /**
- * Caches compilation units
+ * Gets & Caches compilation units
  */
 @SuppressWarnings("unchecked")
 public class CuBase {
@@ -32,13 +34,13 @@ public class CuBase {
 	 * key: file path
 	 * value: compilation unit
 	 */
-	private static final Map<String, CompilationUnit> cuCache = new HashMap<>();
+	private static final Map<String, CompilationUnit> cuCache = new ConcurrentHashMap<>();
 	
 	/**
 	 * key: file path
-	 * value: source
+	 * value: source content
 	 */
-	private static final Map<String, String> docCache = new HashMap<>();
+	private static final Map<String, String> docCache = new ConcurrentHashMap<>();
 	
 	private static final Map<String, String> compilerOptions = JavaCore.getOptions();
 	static {
@@ -79,6 +81,10 @@ public class CuBase {
 		String source = FileUtil.read(new File(srcFile));
 		docCache.put(srcFile, source);
 		return getCuBySource(srcFile, source, true);
+	}
+
+	public static CompilationUnit getCuByQname(String qname) {
+		return getCuByPath(SourcePaths.get(qname));
 	}
 	
 	public static String rewriteSource(String srcFile) {

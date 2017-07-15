@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.iostate.exia.util.MyLogger;
 import com.iostate.exia.core.SourcePaths;
-import com.iostate.exia.classic.util.CuBase;
+import com.iostate.exia.core.CuBase;
 import org.eclipse.jdt.core.dom.*;
 
 @SuppressWarnings("unchecked")

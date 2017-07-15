@@ -71,14 +71,6 @@ public class CommonUtils {
 		return sb.toString();
 	}
 	
-	public static String combineLines(List<String> lines) {
-		StringBuilder sb = new StringBuilder();
-		for (String each : lines) {
-			sb.append(each).append('\n');
-		}
-		return sb.toString();
-	}
-	
 	/**
 	 * Readin a list from string, and "null" is regarded as null
 	 * @param string a string representation of list, elements mustn't contain ','!
@@ -100,10 +92,5 @@ public class CommonUtils {
 	  }
 	  Assert.assertEquals(elements.length, list.size());
 	  return list;
-	}
-	
-	public static String getLastName(String longName) {
-	  String octName = longName.replace('.', '/');
-	  return octName.substring(octName.lastIndexOf('/')+1, octName.length());
 	}
 }

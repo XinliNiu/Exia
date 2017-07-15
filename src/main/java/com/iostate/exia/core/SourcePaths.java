@@ -9,26 +9,30 @@ import com.iostate.exia.walk.FileWalker;
 public class SourcePaths {
   private static boolean inited = false;
   
-  private static final Map<String, String> sourcePaths = new HashMap<>();
+  private static final Map<String, String> qnamesVsPaths = new HashMap<>();
   private static final List<File> roots = new ArrayList<>();
   
   private static final MyLogger logger = MyLogger.getLogger(SourcePaths.class);
   
   static {
-    checkInit();
+    ensureInit();
   }
 
   public static String get(String qname) {
-    String path = sourcePaths.get(qname);
+    String path = qnamesVsPaths.get(qname);
     if (path == null) {throw new RuntimeException("No file for " + qname);}
     return path;
   }
-  
-  public static Map<String, String> sourcePaths() {
-    return Collections.unmodifiableMap(sourcePaths);
+
+  public static boolean containsQname(String qname) {
+    return qnamesVsPaths.containsKey(qname);
   }
-  
-  public static synchronized void checkInit() {
+
+  public static Map<String, String> sourcePaths() {
+    return Collections.unmodifiableMap(qnamesVsPaths);
+  }
+
+  public static synchronized void ensureInit() {
     if (!inited) {
       for (String project : FileWalker.projects) {
         addRoot(new File(project));
@@ -38,8 +42,8 @@ public class SourcePaths {
         goThrough(root);
       }
       
-      if (sourcePaths.isEmpty()) {
-        throw new RuntimeException("Find no file. This is strange!");
+      if (qnamesVsPaths.isEmpty()) {
+        throw new RuntimeException("Found no file. This is weird!");
       }
       inited = true;
     }
@@ -65,11 +69,10 @@ public class SourcePaths {
     if (path.endsWith(".java") && path.contains(_java_) && !path.endsWith("package-info.java")) {
       String qname = path.substring(path.indexOf(_java_) + _java_.length())
           .replace(".java", "").replace('/', '.');
-      if (!qname.startsWith("com.")) {
-        // logger.log(qname+": "+path);
+      if (!qname.contains(".")) {
+        throw new RuntimeException("Weird qualified name having no dot: " + qname);
       }
-      if (!qname.contains(".")) throw new RuntimeException();
-      String prev = sourcePaths.put(qname, path);
+      String prev = qnamesVsPaths.put(qname, path);
       if (prev != null && prev.contains("/main/java/")) {
         logger.log(String.format("WTF dup [%s]: %s,\n      %s", qname, prev, path));
       }

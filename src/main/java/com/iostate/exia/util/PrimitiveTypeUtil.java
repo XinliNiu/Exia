@@ -3,12 +3,12 @@ package com.iostate.exia.util;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PrimitiveUtil {
+public class PrimitiveTypeUtil {
   public static boolean isPrimitive(String typename) {
     return prim2Box.containsKey(typename);
   }
 
-  public static String boxType(String primTypename) {
+  public static String box(String primTypename) {
     String box = prim2Box.get(primTypename);
     return box != null ? box : primTypename;
   }
