@@ -18,10 +18,7 @@ public class FileWalker {
   private final MyLogger logger = MyLogger.getLogger(getClass());
   
   public static String[] projects;
-  
-  private static final ThreadLocal<File> currentFile = new ThreadLocal<File>();
-  public static File getCurrentFile() {return currentFile.get();}
-  
+
   /**
    * root folders to start scan from
    */
@@ -31,7 +28,7 @@ public class FileWalker {
   
   private final AstFunction function;
   
-  private final ConcurrentLinkedQueue<File> files = new ConcurrentLinkedQueue<File>(); 
+  private final ConcurrentLinkedQueue<File> files = new ConcurrentLinkedQueue<>();
   
   public static void launch(String[] roots, FileFilter filter, AstFunction function) {
     new FileWalker(roots, filter, function).walk();
@@ -60,10 +57,10 @@ public class FileWalker {
   }
   
   private void goThrough(File file) {
-//    if (!file.exists()) {
-//      logger.log("File not exist: " + file.getPath());
-//      return;
-//    }
+    if (file.getName().startsWith(".")) {
+      return;
+    }
+
     if (file.isDirectory()) {
       for (File child : file.listFiles()) {
         goThrough(child);
@@ -88,7 +85,6 @@ public class FileWalker {
               break;
             processFile(file);
           }
-          currentFile.remove();
         }
       });
     }
@@ -102,7 +98,6 @@ public class FileWalker {
   }
 
   private void processFile(File file) {
-    currentFile.set(file);
     CompilationUnit cu = CuBase.getCuByPathNoCache(file.getPath(), true);
     boolean modified;
     try {
