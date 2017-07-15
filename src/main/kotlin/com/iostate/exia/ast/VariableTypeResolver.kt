@@ -2,6 +2,7 @@ package com.iostate.exia.ast
 
 import org.eclipse.jdt.core.dom.*
 
+@Suppress("UNCHECKED_CAST")
 class VariableTypeResolver(varSymbol: String, private val minScope: ASTNode) {
   private val symbol: String = varSymbol
 
@@ -59,7 +60,7 @@ class VariableTypeResolver(varSymbol: String, private val minScope: ASTNode) {
       throw RuntimeException(maybeFrag.toString())
     }
     val props = varDecl.structuralPropertiesForType() as List<StructuralPropertyDescriptor>
-    return props.filter({ p -> p.isChildProperty() && p.getId() == "type" })
+    return props.filter({ p -> p.isChildProperty && p.id == "type" })
         .map { p ->
           varDecl.getStructuralProperty(p) as Type
         }.first()
@@ -67,7 +68,7 @@ class VariableTypeResolver(varSymbol: String, private val minScope: ASTNode) {
 
   fun resolveTypeQname(): String {
     val type = resolveType()
-    return AstFind.qnameOfTypeRef(type.toString().trim { it <= ' ' }, FindUpper.cu(type))
+    return AstFind.qnameOfTypeRef(type.toString().trim(), FindUpper.cu(type))
   }
 
   private fun resolve() {
@@ -102,6 +103,7 @@ class VariableTypeResolver(varSymbol: String, private val minScope: ASTNode) {
     return declName != null
   }
 
+  @Suppress("NAME_SHADOWING")
   private fun applyLocal(node: ASTNode) {
     var node = node
     if (node is Block) {
