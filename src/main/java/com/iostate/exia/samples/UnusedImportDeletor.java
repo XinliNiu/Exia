@@ -1,4 +1,4 @@
-package com.iostate.exia.sample;
+package com.iostate.exia.samples;
 
 import java.io.File;
 import java.util.ArrayList;

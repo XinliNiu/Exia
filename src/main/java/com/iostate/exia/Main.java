@@ -10,6 +10,6 @@ public class Main {
 
     String basePackageName = "com.iostate.exia.samples";
     Class<?> clazz = Class.forName(basePackageName + "." + className);
-    clazz.getDeclaredMethods()[0].invoke(null, (Object)paths);
+    clazz.getDeclaredMethod("main", String[].class).invoke(null, (Object)paths);
   }
 }
