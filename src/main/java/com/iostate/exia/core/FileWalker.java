@@ -111,7 +111,7 @@ public class FileWalker {
     }
     if (modified) {
       logger.log("Write " + file.getPath());
-      String content = CuBase.rewriteSource(file.getPath());
+      String content = CuBase.rewriteSource(cu, file);
       FileUtil.write(file, content);
     }
   }

@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.iostate.exia.ast.visitors.ExtraArrayDimensionRewriter;
 import com.iostate.exia.io.FileUtil;
-import com.iostate.exia.util.Assert;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.dom.AST;
@@ -81,9 +80,9 @@ public class CuBase {
 		return getCuByPath(SourcePaths.get(qname));
 	}
 	
-	public static String rewriteSource(String srcFile) {
-		Document document = new Document(getSourceDoc(srcFile));
-		TextEdit edits = getCuByPath(srcFile).rewrite(document, formatterOptions);
+	public static String rewriteSource(CompilationUnit cu, File file) {
+		Document document = new Document(getSourceDoc(file.getPath()));
+		TextEdit edits = cu.rewrite(document, formatterOptions);
 		try {
 			edits.apply(document);
 		} catch (Exception e) {
