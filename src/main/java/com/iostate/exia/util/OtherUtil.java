@@ -1,17 +1,12 @@
 package com.iostate.exia.util;
 
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.iostate.exia.util.Assert;
-import com.iostate.exia.util.MyLogger;
 
 public class OtherUtil {
 

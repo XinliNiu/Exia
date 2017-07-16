@@ -13,6 +13,9 @@ import com.iostate.exia.api.AstFunction;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 
+/**
+ * Multi-threaded. You can set threads to 1 for small codebase.
+ */
 public class FileWalker {
   
   private final MyLogger logger = MyLogger.getLogger(getClass());

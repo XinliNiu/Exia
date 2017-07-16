@@ -73,11 +73,7 @@ public class CuBase {
 	}
 	
 	public static CompilationUnit getCuByPath(String srcFile) {
-	    if (docCache.get(srcFile) != null) {
-	      return getCuBySource(srcFile, docCache.get(srcFile), true);
-	    }
-		String source = FileUtil.read(new File(srcFile));
-		docCache.put(srcFile, source);
+		String source = getSourceDoc(srcFile);
 		return getCuBySource(srcFile, source, true);
 	}
 
@@ -86,9 +82,8 @@ public class CuBase {
 	}
 	
 	public static String rewriteSource(String srcFile) {
-	    Assert.assertNotNull(docCache.get(srcFile));
-		Document document = new Document(docCache.get(srcFile));
-		TextEdit edits = cuCache.get(srcFile).rewrite(document, formatterOptions);
+		Document document = new Document(getSourceDoc(srcFile));
+		TextEdit edits = getCuByPath(srcFile).rewrite(document, formatterOptions);
 		try {
 			edits.apply(document);
 		} catch (Exception e) {
@@ -100,7 +95,16 @@ public class CuBase {
 	public static Map getFormatterOptions() {
 	  return Collections.unmodifiableMap(formatterOptions);
 	}
-	
+
+	private static String getSourceDoc(String srcFile) {
+		String doc = docCache.get(srcFile);
+		if (doc == null) {
+			doc = FileUtil.read(new File(srcFile));
+			docCache.put(srcFile, doc);
+		}
+		return doc;
+	}
+
 	private static CompilationUnit getCuBySource(String srcFile, String source, boolean recordable) {		
 		CompilationUnit cu = cuCache.get(srcFile);
 		if (cu != null) {
