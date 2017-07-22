@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.iostate.exia.util.MyLogger;
-import com.iostate.exia.core.SourcePaths;
-import com.iostate.exia.core.CuBase;
 import org.eclipse.jdt.core.dom.*;
 
 @SuppressWarnings("unchecked")
@@ -32,50 +30,6 @@ public class AstUtils {
       List l = (List) old.getParent().getStructuralProperty(p);
       l.set(l.indexOf(old), neo);
     }
-  }
-
-  public static FieldDeclaration findFieldByName(String name, TypeDeclaration type) {
-    for (FieldDeclaration field : type.getFields()) {
-      for (Object frag : field.fragments()) {
-        if (((VariableDeclarationFragment) frag)
-            .getName().getIdentifier().equals(name)) {
-          return field;
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
-   * returns the first one met
-   */
-  public static MethodDeclaration findMethodByName(String name, AbstractTypeDeclaration type) {
-    for (Object member : type.bodyDeclarations()) {
-      if (member instanceof MethodDeclaration) {
-        MethodDeclaration method = (MethodDeclaration) member;
-        if (method.getName().getIdentifier().equals(name)) {
-          return method;
-        }
-      }
-    }
-    return null;
-  }
-
-  public static ImportDeclaration findImportByLastName(String name, List<ImportDeclaration> imports) {
-    for (ImportDeclaration imp : imports) {
-      String impFullName = imp.getName().getFullyQualifiedName();
-      String impLastName = impFullName.substring(impFullName.lastIndexOf('.') + 1);
-      if (impLastName.equals(name)) {
-        return imp;
-      }
-    }
-    return null;
-  }
-
-  public static boolean typeHasName(SimpleType type, String name) {
-    if (type.getName().getFullyQualifiedName().equals(name)) {
-      return true;
-    } else return false;
   }
 
   public static String pureNameOfType(Type type) {
@@ -128,7 +82,7 @@ public class AstUtils {
   public static boolean isTypeSerializable(TypeDeclaration type) {
     List<Type> interfaces = type.superInterfaceTypes();
     for (Type intf : interfaces) {
-      if (intf.toString().contains("Serializable")) {
+      if (intf.toString().trim().endsWith("Serializable")) {
         return true;
       }
     }
@@ -167,25 +121,6 @@ public class AstUtils {
 
   public static boolean isClientCallGrammar(MethodInvocation mi) {
     return !isSelfCallGrammar(mi);
-  }
-
-  public static List<TypeDeclaration> superClasses(TypeDeclaration td) {
-    List<TypeDeclaration> supers = new ArrayList<>();
-    String name = null;
-    while (true) {
-      if (td.getSuperclassType() != null) {
-        name = td.getSuperclassType().toString().trim();
-      }
-      if (!name.contains(".")) {
-        name = findImportByLastName(name, ((CompilationUnit) td.getParent()).imports()).getName().getFullyQualifiedName();
-      }
-      if (name == null) {
-        break;
-      } else {
-        supers.add(getType(CuBase.getCuByPath(SourcePaths.get(name))));
-      }
-    }
-    return supers;
   }
 
   public static boolean isFieldInjectable(FieldDeclaration fd, String annoClassSimpleName) {
