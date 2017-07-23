@@ -5,6 +5,8 @@ Proved on 2 million lines of code: a tooling framework for automatic analysis an
 
 Works on Java 6/7 codebases.
 
+Apache 2.0-licensed open source project.
+
 ### Usage
 
 Install JDK 8 before using.
